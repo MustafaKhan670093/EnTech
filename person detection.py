@@ -25,6 +25,7 @@ cap = cv2.VideoCapture(1)#0 is internal cam : 1 is external webcam
 
 z=0
 while(1):
+    #photo analysis
     z += 1
     ret, frame = cap.read()
     cv2.imshow("imshow",frame)
@@ -43,7 +44,6 @@ while(1):
                 print("person" + " " + str(int(x["percentage_probability"])))
 
 
-                #somethingn somethingn somethingn
 
 #analyzing the image and then creating a file that highlights the isolated objects in the initial folder
 
