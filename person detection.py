@@ -5,27 +5,28 @@ from clarifai import rest
 from clarifai.rest import ClarifaiApp
 
 
-#returns a working directory for the actual folder of the file
+#Returns a working directory for the actual folder of the file.
 execution_path = os.getcwd()
 
 print(execution_path)
 
-#Initialize the detector
+#Initialize the detector.
 detector = ObjectDetection()
 
-#this sets the initial object detection model instance to the pre trained "RetinaNet" model. This was downloaded from a whl
+#This sets the initial object detection model instance to the pre trained "RetinaNet" model. 
 detector.setModelTypeAsRetinaNet()
 
 #Set the model path of the model file we downloaded (the resnet model that uses the COCO database)
 detector.setModelPath(os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
 
-#Load the model
+#Load the model.
 detector.loadModel()
-cap = cv2.VideoCapture(1)#0 is internal cam : 1 is external webcam
+cap = cv2.VideoCapture(1) 
+#Note: 0 is internal cam and 1 is external webcam.
 
 z=0
 while(1):
-    #photo analysis
+    #Photo analysis.
     z += 1
     ret, frame = cap.read()
     cv2.imshow("imshow",frame)
@@ -42,10 +43,3 @@ while(1):
         for x in detections:
             if(x["name"] == "person" and int(x["percentage_probability"]) > 80):
                 print("person" + " " + str(int(x["percentage_probability"])))
-
-
-
-#analyzing the image and then creating a file that highlights the isolated objects in the initial folder
-
-
-#compare the image to the images stored in the COCO database and find the percentage of similarity
